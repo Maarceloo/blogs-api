@@ -16,6 +16,13 @@ const UserSchema = (sequelize, DataTypes) => {
       tableName: "users",
     }
   );
+
+  UserTable.associate = (models) => {
+    UserTable.hasMany(models.BlogPost, {
+      as: "blog_post",
+    });
+  };
+
   return UserTable;
 };
 
