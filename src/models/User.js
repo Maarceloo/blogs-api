@@ -1,15 +1,22 @@
 const UserSchema = (sequelize, DataTypes) => {
-    const UserTable = sequelize.define('User', {
-        id: DataTypes.INTEGER,
-        display_name: DataTypes.STRING,
-        email: DataTypes.STRING,
-        password: DataTypes.STRING,
-        image: DataTypes.STRING,
+  const UserTable = sequelize.define(
+    "User",
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+      },
+      display_name: DataTypes.STRING,
+      email: DataTypes.STRING,
+      password: DataTypes.STRING,
+      image: DataTypes.STRING,
     },
     {
-        tableName: 'users'
-    });
-    return UserTable;
-}
+      timestamps: false,
+      tableName: "users",
+    }
+  );
+  return UserTable;
+};
 
 module.exports = UserSchema;
