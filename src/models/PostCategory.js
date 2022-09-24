@@ -17,16 +17,20 @@ const PostCategorySchema = (sequelize, DataTypes) => {
     }
   );
 
-//   PostCategoryTable.associate = (models) => {
-//     PostCategoryTable.belongsToMany(models.BlogPost, {
-//       as: "blog_posts",
-//       foreignKey: "id",
-//     });
-//     PostCategoryTable.belongsToMany(models.Category, {
-//       as: "categories",
-//       foreignKey: "id",
-//     });
-//   };
+  PostCategoryTable.associate = (models) => {
+    models.BlogPost.belongsToMany(models.Category, {
+      as: "categories",
+      through: PostCategoryTable,
+      foreignKey: "category_id",
+      otherKey: "post_id",
+    });
+    models.Category.belongsToMany(models.BlogPost, {
+      as: "blog_post",
+      through: PostCategoryTable,
+      foreignKey: "post_id",
+      otherKey: "category_id",
+    });
+  };
 
   return PostCategoryTable;
 };
