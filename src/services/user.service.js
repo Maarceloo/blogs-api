@@ -13,6 +13,20 @@ const getlogin = async ({ email, password }) => {
   return user.id;
 };
 
+const registerUser = async (body) => {
+  const { email } = body;
+
+  const [user] = await User.findAll({ where: { email } });
+  if (user) {
+    return false;
+  }
+
+  await User.create(body);
+
+  return true;
+};
+
 module.exports = {
     getlogin,
+    registerUser,
 };
