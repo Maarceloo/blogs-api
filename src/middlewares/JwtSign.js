@@ -1,10 +1,38 @@
+require('dotenv');
 const jwt = require('jsonwebtoken');
+const userService = require('../services/user.service');
 
 const secret = process.env.JWT_SECRET || 'senha';
 
 const jwtConfig = {
-    expiresIn: '7d',
-    algorithm: 'HS256',
+  expiresIn: '7d',
+  algorithm: 'HS256',
 };
 
-module.exports = (userId) => jwt.sign({ userId }, secret, jwtConfig);
+const jwtSign = (userId) => jwt.sign({ userId }, secret, jwtConfig);
+
+const jwtValidate = async (req, res, next) => {
+  const token = req.header('Authorization');
+
+  if (!token) {
+    return res.status(401).json({
+      message: 'Token not found',
+    });
+  }
+
+  try {
+    const decoded = jwt.verify(token, secret);
+    const user = await userService.getByuserId(decoded.data.userId);
+    req.user = user;
+    next();
+  } catch (error) {
+    return res.status(401).json({
+      message: 'Expired or invalid token',
+    });
+  }
+};
+
+module.exports = {
+  jwtSign,
+  jwtValidate,
+};

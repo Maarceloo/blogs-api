@@ -1,5 +1,5 @@
 const { registerUser } = require('../services/user.service');
-const jwtSign = require('../middlewares/JwtSign');
+const jwt = require('../middlewares/JwtSign');
 
 const userController = async (req, res) => {
   const userId = await registerUser(req.body);
@@ -10,7 +10,7 @@ const userController = async (req, res) => {
     });
   }
 
-  const token = jwtSign(userId);
+  const token = jwt.jwtSign(userId);
 
   return res.status(201).json({ token });
 };

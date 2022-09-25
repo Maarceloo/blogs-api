@@ -1,18 +1,18 @@
 const { getlogin } = require('../services/user.service');
-const jwtSign = require('../middlewares/JwtSign');
+const jwt = require('../middlewares/JwtSign');
 
 const loginController = async (req, res) => {
   const { email, password } = req.body;
 
-  const user = await getlogin({ email, password });
+  const userId = await getlogin({ email, password });
 
-  if (!user) {
+  if (!userId) {
     return res.status(400).json({
       message: 'Invalid fields',
     });
   }
 
-  const token = jwtSign(user);
+  const token = jwt.jwtSign(userId);
 
   return res.status(200).json({ token });
 };
