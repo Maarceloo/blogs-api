@@ -21,12 +21,15 @@ const registerUser = async (body) => {
     return false;
   }
 
-  await User.create(body);
+  const newUserDB = await User.create(body);
 
-  return true;
+  return newUserDB.dataValues.id;
 };
+
+const getByuserId = async (userId) => User.findByPk(userId);
 
 module.exports = {
     getlogin,
     registerUser,
+    getByuserId,
 };

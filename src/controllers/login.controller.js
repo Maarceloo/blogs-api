@@ -1,8 +1,5 @@
-const jwt = require('jsonwebtoken');
-
-const { JWT_SECRET } = process.env;
-
 const { getlogin } = require('../services/user.service');
+const jwtSign = require('../middlewares/JwtSign');
 
 const loginController = async (req, res) => {
   const { email, password } = req.body;
@@ -15,7 +12,7 @@ const loginController = async (req, res) => {
     });
   }
 
-  const token = jwt.sign({ email }, JWT_SECRET, {});
+  const token = jwtSign(user);
 
   return res.status(200).json({ token });
 };

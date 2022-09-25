@@ -1,19 +1,16 @@
-const jwt = require('jsonwebtoken');
-
-const { JWT_SECRET } = process.env;
-
 const { registerUser } = require('../services/user.service');
+const jwtSign = require('../middlewares/JwtSign');
 
 const userController = async (req, res) => {
-  const user = await registerUser(req.body);
+  const userId = await registerUser(req.body);
 
-  if (!user) {
+  if (!userId) {
     return res.status(409).json({
       message: 'User already registered',
     });
   }
 
-  const token = jwt.sign({ user }, JWT_SECRET, {});
+  const token = jwtSign(userId);
 
   return res.status(201).json({ token });
 };
