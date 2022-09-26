@@ -12,13 +12,11 @@ const jwtSign = (userId) => jwt.sign({ userId }, secret, jwtConfig);
 
 const jwtValidate = async (req, res, next) => {
   const token = req.header('Authorization');
-  console.log(token);
 
   if (!token) return res.status(401).json({ message: 'Token not found' });
 
   try {
-    const decoded = jwt.verify(token, secret);
-    req.userId = decoded.userId;
+    jwt.verify(token, secret);
     next();
   } catch (error) {
     return res.status(401).json({ message: 'Expired or invalid token' });
