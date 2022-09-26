@@ -6,6 +6,9 @@ const addNewCategoryDB = async (name) => {
   return newCategory.dataValues;
 };
 
+const getAllCategoriesDB = async () => Category.findAll();
+
 module.exports = {
   addNewCategoryDB,
+  getAllCategoriesDB,
 };
