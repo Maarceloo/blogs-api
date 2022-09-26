@@ -1,5 +1,5 @@
 const { getlogin } = require('../services/user.service');
-const jwt = require('../middlewares/JwtSign');
+const jwt = require('../middlewares/Jwt');
 
 const loginController = async (req, res) => {
   const { email, password } = req.body;

@@ -28,8 +28,11 @@ const registerUser = async (body) => {
 
 const getByuserId = async (userId) => User.findByPk(userId);
 
+const getAllUsers = async () => User.findAll();
+
 module.exports = {
     getlogin,
     registerUser,
     getByuserId,
+    getAllUsers,
 };
