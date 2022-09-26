@@ -9,4 +9,6 @@ userRoute.post('/', userValidation.userValidation, userController.userRegisterCo
 
 userRoute.get('/', jwt.jwtValidate, userController.userGetAllController);
 
+userRoute.get('/:id', jwt.jwtValidate, userController.userIDGetController);
+
 module.exports = userRoute;
