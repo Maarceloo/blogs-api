@@ -13,6 +13,19 @@ const userSchema = joi.object({
   image: joi.string(),
 });
 
+const postSchema = joi.object({
+  title: joi.string().required().messages({
+    'string.empty': 'Some required fields are missing',
+  }),
+  content: joi.string().required().messages({
+    'string.required': 'Some required fields are missing',
+  }),
+  categoryIds: joi.array().min(1).required().messages({
+    'string.required': 'Some required fields are missing',
+  }),
+});
+
 module.exports = {
   userSchema,
+  postSchema,
 };
