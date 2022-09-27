@@ -17,13 +17,7 @@ const userRegisterController = async (req, res) => {
 
 const userGetAllController = async (_req, res) => {
   const users = await userService.getAllUsers();
-  const usersNotPassword = users.map((user) => ({
-    id: user.id,
-    displayName: user.displayName,
-    email: user.email,
-    image: user.image,
-  }));
-  return res.status(200).json(usersNotPassword);
+  return res.status(200).json(users);
 };
 
 const userIDGetController = async (req, res) => {

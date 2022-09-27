@@ -28,7 +28,9 @@ const registerUser = async (body) => {
 
 const getByuserId = async (userId) => User.findByPk(userId);
 
-const getAllUsers = async () => User.findAll();
+const getAllUsers = async () => User.findAll({
+  attributes: { exclude: ['password'] },
+});
 
 module.exports = {
     getlogin,
