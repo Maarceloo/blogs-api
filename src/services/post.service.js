@@ -36,7 +36,27 @@ const getPost = async () => {
   return posts;
 };
 
+const getPostId = async (id) => {
+  const posts = await BlogPost.findByPk(id, {
+    include: [
+      {
+        model: User,
+        as: 'user',
+        attributes: { exclude: ['password'] },
+      },
+      {
+        model: Category,
+        as: 'categories',
+        trough: { attributes: [] },
+      },
+    ],
+  });
+
+  return posts;
+};
+
 module.exports = {
   addNewBlogPostDB,
   getPost,
+  getPostId,
 };
