@@ -33,9 +33,18 @@ const putBlogPostID = async (req, res) => {
     return res.status(200).json(newPost);
 };
 
+const deleteBlogPost = async (req, res) => {
+    const { id } = req.params;
+
+     await postService.deletePost(id);
+
+    return res.status(204).json();
+};
+
 module.exports = {
     newPostController,
     getBlogUserCategory,
     getBlogPostId,
     putBlogPostID,
+    deleteBlogPost,
 };

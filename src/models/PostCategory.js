@@ -23,13 +23,13 @@ const PostCategorySchema = (sequelize, DataTypes) => {
       as: "categories",
       through: PostCategoryTable,
       foreignKey: "categoryId",
-      // otherKey: "postId",
+      otherKey: "postId",
     });
     models.Category.belongsToMany(models.BlogPost, {
       as: "blog_posts",
       through: PostCategoryTable,
       foreignKey: "postId",
-      // otherKey: "categoryId",
+      otherKey: "categoryId",
     });
   };
 

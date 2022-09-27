@@ -19,9 +19,11 @@ postRoute.get('/:id', jwt.jwtValidate, postController.getBlogPostId);
 postRoute.put(
   '/:id',
   jwt.jwtValidate,
-  validate.postPutValidate,
   jwt.authenticateToken,
+  validate.postPutValidate,
   postController.putBlogPostID,
 );
+
+postRoute.delete('/:id', jwt.jwtValidate, jwt.authenticateToken, postController.deleteBlogPost);
 
 module.exports = postRoute;

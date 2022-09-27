@@ -30,9 +30,9 @@ const authenticateToken = async (req, res, next) => {
     const { user } = req;
 
     const post = await postService.getPostId(id);
-    const { userId } = post.dataValues;
-
     if (!post) return res.status(404).json({ message: 'Post does not exist' });
+    
+    const { userId } = post.dataValues;
     if (userId !== user) return res.status(401).json({ message: 'Unauthorized user' });
 
     next();
