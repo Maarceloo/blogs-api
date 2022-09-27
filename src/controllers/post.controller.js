@@ -15,7 +15,15 @@ const getBlogUserCategory = async (_req, res) => {
     return res.status(200).json(post);
 };
 
+const getBlogPostId = async (req, res) => {
+    const { id } = req.params;
+    const post = await postService.getPostId(id);
+
+    return res.status(200).json(post);
+};
+
 module.exports = {
     newPostController,
     getBlogUserCategory,
+    getBlogPostId,
 };
