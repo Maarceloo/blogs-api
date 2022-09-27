@@ -1,5 +1,6 @@
 require('dotenv');
 const jwt = require('jsonwebtoken');
+const postService = require('../services/post.service');
 
 const secret = process.env.JWT_SECRET || 'senha';
 
@@ -24,7 +25,21 @@ const jwtValidate = async (req, res, next) => {
   }
 };
 
+const authenticateToken = async (req, res, next) => {
+    const { id } = req.params;
+    const { user } = req;
+
+    const post = await postService.getPostId(id);
+    const { userId } = post.dataValues;
+
+    if (!post) return res.status(404).json({ message: 'Post does not exist' });
+    if (userId !== user) return res.status(401).json({ message: 'Unauthorized user' });
+
+    next();
+};
+
 module.exports = {
   jwtSign,
   jwtValidate,
+  authenticateToken,
 };

@@ -24,8 +24,18 @@ const getBlogPostId = async (req, res) => {
     return res.status(200).json(post);
 };
 
+const putBlogPostID = async (req, res) => {
+    const { id } = req.params;
+    const { title, content } = req.body;
+
+    const newPost = await postService.updatePost(id, title, content);
+
+    return res.status(200).json(newPost);
+};
+
 module.exports = {
     newPostController,
     getBlogUserCategory,
     getBlogPostId,
+    putBlogPostID,
 };
