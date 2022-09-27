@@ -9,6 +9,13 @@ const newPostController = async (req, res) => {
     return res.status(201).json(newPost);
 };
 
+const getBlogUserCategory = async (_req, res) => {
+    const post = await postService.getPost();
+
+    return res.status(200).json(post);
+};
+
 module.exports = {
     newPostController,
+    getBlogUserCategory,
 };
