@@ -1,4 +1,5 @@
 const { User } = require('../models');
+// const PostService = require('./post.service');
 
 const getlogin = async ({ email, password }) => {
   const [user] = await User.findAll({ where: { email } });
@@ -32,9 +33,15 @@ const getAllUsers = async () => User.findAll({
   attributes: { exclude: ['password'] },
 });
 
+const deleteUser = async (_id) => {
+  // await PostService.deletePost(id);
+  // await User.destroy({ where: { id } });
+};
+
 module.exports = {
     getlogin,
     registerUser,
     getByuserId,
     getAllUsers,
+    deleteUser,
 };
